@@ -1,7 +1,8 @@
 export const handler = async () => {
   const response = {
     statusCode: 200,
-    body: JSON.stringify("Hello from aws-chat-randy AWS Lambda Function!"),
+    body: JSON.stringify(1),
   };
+
   return response;
 };
