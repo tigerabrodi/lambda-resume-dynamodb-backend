@@ -4,8 +4,14 @@ const documentClient = new AWS.DynamoDB.DocumentClient({
   region: "eu-west-3",
 });
 
+type Item = {
+  count: number;
+  visitorId: string;
+};
+
+// using node-lambda to test this locally.
 export const handler = async () => {
-  return await documentClient
+  const response = await documentClient
     .get({
       TableName: "visitors",
       Key: {
@@ -13,4 +19,19 @@ export const handler = async () => {
       },
     })
     .promise();
+
+  const item = response.Item as Item;
+  const newCount = item.count + 1;
+
+  await documentClient
+    .put({
+      Item: {
+        visitorId: "1",
+        count: newCount,
+      },
+      TableName: "visitors",
+    })
+    .promise();
+
+  return newCount;
 };

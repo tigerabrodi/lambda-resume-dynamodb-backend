@@ -1,3 +1,8 @@
 node_modules
 dist
 .aws
+.env
+deploy.env
+context.json
+event.json
+event_sources.json
